@@ -1,0 +1,182 @@
+/* --- CONFIGURACIÓN GENERAL --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #2E4033; /* Verde oscuro elegante */
+    color: white;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: #E8F5E9;
+}
+
+.subtitulo {
+    font-size: 1.1em;
+    margin-bottom: 40px;
+    color: #C8E6C9;
+}
+
+.contenedor-principal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding-bottom: 50px;
+}
+
+/* --- EL PLATO (FONDO DE COLORES) --- */
+.plato-grafico {
+   position: relative;
+    
+    /* CAMBIA ESTOS DOS VALORES */
+    width: 800px;  /* Antes era 650px */
+    height: 800px; /* Antes era 650px */
+    /* IMPORTANTE: Mantén los dos valores iguales para que sea un círculo */
+    
+    border-radius: 50%;
+    border: 12px solid white;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    
+    /* GRADIENTE CÓNICO (Tus porcentajes se mantienen igual) */
+    background: conic-gradient(
+        #AED581 0deg 180deg,       /* 50% */
+        #fee36c 180deg 259.2deg,   /* 22% */
+        #ffece5 259.2deg 313.2deg, /* 15% */
+        #ff7272 313.2deg 342deg,   /* 8% */
+        #7b866e 342deg 360deg      /* 5% */
+    );
+}
+
+/* --- CONTENEDOR DE CADA PRODUCTO --- */
+.contenedor-producto {
+    position: absolute;
+    width: 55px; /* Hice los iconos un poco más chicos para que quepan todos */
+    height: 55px;
+    cursor: pointer;
+    z-index: 10;
+    transition: z-index 0.2s; /* Para que al pasar el mouse suba de capa */
+}
+
+/* Al pasar el mouse, el contenedor sube al frente para que no lo tapen otros */
+.contenedor-producto:hover {
+    z-index: 100;
+}
+
+.contenedor-producto img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ajusta la imagen sin deformarla */
+    filter: drop-shadow(0px 2px 3px rgba(0,0,0,0.4));
+    transition: transform 0.2s ease;
+}
+
+.contenedor-producto:hover img {
+    transform: scale(1.4); /* Zoom grande al pasar el ratón */
+}
+
+/* --- EL TEXTO OCULTO (TOOLTIP) --- */
+.texto-oculto {
+    position: absolute;
+    bottom: 110%; 
+    left: 50%;
+    transform: translateX(-50%);
+    
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.95);
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    text-align: center;
+    pointer-events: none;
+    
+    /* Animación */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* Flechita decorativa */
+.texto-oculto::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -6px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: rgba(0,0,0,0.95) transparent transparent transparent;
+}
+
+/* Mostrar texto */
+.contenedor-producto:hover .texto-oculto {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* =======================================================
+   COORDENADAS DE LOS 30+ ALIMENTOS
+   (Ajustadas para que no se encimen demasiado)
+   ======================================================= */
+
+/* --- GRUPO 1: FRUTAS Y VERDURAS (Lado Derecho 0-180 grados) --- */
+.pos-fruta-1 { top: 15%; right: 30%; } /* Nopal */
+.pos-fruta-2 { top: 25%; right: 15%; } /* Chayote */
+.pos-fruta-3 { top: 40%; right: 10%; } /* Tomate */
+.pos-fruta-4 { top: 55%; right: 10%; } /* Jamaica */
+.pos-fruta-5 { top: 70%; right: 20%; } /* Mamey */
+.pos-fruta-6 { top: 80%; right: 35%; } /* Guayaba */
+
+/* Segunda fila interna para aprovechar espacio */
+.pos-fruta-7 { top: 30%; right: 40%; } /* Nance */
+.pos-fruta-8 { top: 45%; right: 30%; } /* Pitahaya */
+.pos-fruta-9 { top: 60%; right: 30%; } /* Tuna */
+.pos-fruta-10 { top: 50%; right: 40%; } /* Chiles */
+.pos-fruta-11 { top: 20%; right: 40%; } /* Papaya */
+
+
+/* --- GRUPO 2: CEREALES (Abajo Izquierda 180-260 grados) --- */
+.pos-cereal-1 { bottom: 12%; left: 35%; } /* Maíz */
+.pos-cereal-2 { bottom: 10%; left: 25%; } /* Teocintle */
+.pos-cereal-3 { bottom: 25%; left: 20%; } /* Amaranto */
+.pos-cereal-4 { bottom: 35%; left: 12%; } /* Chía */
+
+/* Fila interna */
+.pos-cereal-5 { bottom: 28%; left: 35%; } /* Jícama */
+.pos-cereal-6 { bottom: 35%; left: 25%; } /* Camote */
+.pos-cereal-7 { bottom: 35%; left: 40%; } /* Yuca */
+
+
+/* --- GRUPO 3: LEGUMINOSAS (Izquierda Medio 260-313 grados) --- */
+.pos-legum-1 { top: 50%; left: 5%; }  /* Frijol */
+.pos-legum-2 { top: 40%; left: 11%; } /* Haba */
+.pos-legum-3 { top: 30%; left: 16%; } /* Lenteja */
+.pos-legum-4 { top: 45%; left: 20%; } /* Garbanzo */
+.pos-legum-5 { top: 40%; left: 28%; } /* Soja */
+
+
+/* --- GRUPO 4: GRASAS (Arriba Centro - Espacio MUY pequeño 5%) --- */
+/* Los he puesto en "zigzag" vertical para que quepan */
+.pos-grasa-1 { top: 3%; left: 43%; }  /* Oliva */
+.pos-grasa-2 { top: 15%; left: 43%; } /* Canola */
+.pos-grasa-3 { top: 20%; left: 43%; } /* Manteca */
+.pos-grasa-4 { top: 28%; left: 44%; } /* Mantequilla */
+.pos-grasa-5 { top: 10%; left: 40%; transform: scale(1.0); } /* Aguacate */
+.pos-grasa-6 { top: 2%; left: 36%; transform: scale(0.8); } /* Coco */
+
+
+/* --- GRUPO 5: ANIMAL (Arriba Izquierda - Espacio pequeño 8%) --- */
+.pos-animal-1 { top: 15%; left: 20%;transform: rotate(-45deg); } /* Res */
+.pos-animal-2 { top: 6%; left: 25%;transform: rotate(-45deg); } /* Pollo */
+.pos-animal-3 { top: 20%; left: 25%; transform: rotate(-45deg);}  /* Pescado */
+.pos-animal-4 { top: 13%; left: 30%; transform: rotate(-45deg); } /* Huevo */  /*de 1 a 100 (1 es arriba_100 abajo) 1 es izquierda 100 derecha */
+.pos-animal-5 { top: 25%; left: 30%;transform: rotate(-45deg); } /* Leche */
+.pos-animal-6 { top: 30%; left: 35%; transform: rotate(-45deg);}  /* Queso */
+.pos-animal-7 { top: 12%; left: 15%; transform: scale(0.8);transform: rotate(-45deg); } /* Yogur */
